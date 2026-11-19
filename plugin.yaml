@@ -1,0 +1,11 @@
+name: cyberwarmachine
+version: "0.1.0"
+description: "The cold-lit CyberWarMachine monument and drifting dithered haze behind the Hermes workspace."
+author: CyberWarMachine
+manifest_version: 1
+kind: standalone
+requires_hermes: ">=0.22.2"
+provides_tools: []
+provides_hooks: []
+provides_middleware: []
+requires_env: []

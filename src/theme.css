@@ -1,0 +1,100 @@
+/* Selectors that reference Hermes UI markup are decoration only. */
+__THEME_SCOPE__[data-cwm-mounted] {
+  --cwm-night: #030810;
+  --cwm-rule: color-mix(in srgb, var(--theme-foreground) 22%, transparent);
+  --cwm-accent: var(--theme-midground);
+  --cwm-surface: var(--theme-card-seed);
+  background: var(--cwm-night) !important;
+  --ui-chat-surface-background: transparent;
+  --ui-sidebar-surface-background: var(--theme-sidebar-seed);
+  --ui-editor-surface-background: var(--theme-background-seed);
+  --ui-terminal-surface-background: var(--theme-background-seed);
+}
+__THEME_SCOPE__[data-cwm-mounted] body,
+__THEME_SCOPE__[data-cwm-mounted] [data-contrib-shell],
+__THEME_SCOPE__[data-cwm-mounted] [data-slot='sidebar-wrapper'] { background: transparent !important; }
+__THEME_SCOPE__ [data-cwm-stage] {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  background: radial-gradient(ellipse at 79% 88%, #101e33 0%, #030810 63%);
+  opacity: .27;
+}
+__THEME_SCOPE__ [data-cwm-monument] {
+  position: absolute; bottom: 12%; right: 3.8%; width: min(76vh, 73vw); aspect-ratio: 806 / 804;
+  background: url('__MONUMENT__') center / contain no-repeat;
+  mask-image: linear-gradient(to right, transparent 0%, black 15% 83%, transparent 100%),
+    linear-gradient(to bottom, transparent, black 3% 94%, transparent);
+  mask-composite: intersect;
+}
+__THEME_SCOPE__ [data-cwm-haze] {
+  display: none; position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated;
+}
+/* The optional intro can be disabled independently of transcript state. */
+__THEME_SCOPE____EMPTY_CHAT__ [data-cwm-haze] { display: block; }
+__THEME_SCOPE____EMPTY_CHAT__ [data-cwm-stage] { opacity: 1; }
+/* Clear only the editor group hosting the primary chat, not sibling panes. */
+__THEME_SCOPE__[data-cwm-mounted] [data-tree-group]:has([data-chat-surface][data-session-anchor='workspace']) {
+  background-color: transparent;
+}
+/* Let the theme replace the stock decorative statue without editing settings. */
+__THEME_SCOPE__[data-cwm-mounted] [data-chat-surface] > [aria-hidden]:has(> img[alt=''][src$='/ds-assets/filler-bg0.jpg']) {
+  display: none;
+}
+__THEME_SCOPE__ [data-cwm-stage]::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, #030810 12%, #030810f5 24%, #03081093 42%, #03081009 65%, transparent 90%),
+    linear-gradient(0deg, #030810e8, transparent 15%, transparent 89%, #03081035);
+}
+__THEME_SCOPE__:not(.dark)[data-cwm-mounted] {
+  --ui-chat-surface-background: color-mix(in srgb, var(--theme-background-seed) 97%, transparent);
+}
+__THEME_SCOPE__:not(.dark)__EMPTY_CHAT__[data-cwm-mounted] [data-chat-surface][data-session-anchor='workspace'] { --ui-chat-surface-background: transparent; }
+__THEME_SCOPE__ :is([data-glass-opaque], [data-glass-raised]) {
+  --ui-chat-surface-background: var(--theme-background-seed);
+  --ui-editor-surface-background: var(--theme-background-seed);
+  --ui-sidebar-surface-background: var(--theme-sidebar-seed);
+}
+__THEME_SCOPE__ [data-slot='sidebar'] {
+  background-color: var(--theme-sidebar-seed) !important;
+  border-inline-end: 1px solid var(--cwm-rule);
+}
+__THEME_SCOPE__.dark [data-slot='sidebar'] { background-color: #080f1bea !important; }
+__THEME_SCOPE__ [data-slot='aui_intro'] {
+  align-items: flex-start; text-align: start; color: #b8c4d6;
+  padding-inline-start: clamp(16px, 4vw, 70px);
+}
+__THEME_SCOPE__ [data-slot='aui_intro'] > div {
+  max-width: clamp(230px, 34vw, 475px); text-align: start;
+}
+__THEME_SCOPE__ [data-slot='aui_intro'] .wordmark {
+  color: #ede8e4; mix-blend-mode: normal; text-align: start; max-width: 100%;
+}
+__THEME_SCOPE__ [data-slot='aui_intro'] > div > p { text-align: start; color: inherit; }
+__THEME_SCOPE__:not(.dark) [data-slot='aui_intro'] > div {
+  color: var(--theme-foreground); background: var(--theme-card-seed);
+  border: 1px solid var(--cwm-rule); border-block-start-color: var(--cwm-accent);
+  padding: 12px 16px;
+}
+__THEME_SCOPE__:not(.dark) [data-slot='aui_intro'] .wordmark { color: var(--theme-foreground); }
+__THEME_SCOPE__ :is([data-slot='pane-tab'], [data-tree-tab]) {
+  font-family: var(--dt-font-mono, ui-monospace); border-radius: 0;
+}
+__THEME_SCOPE__ :is([data-slot='pane-tab'], [data-tree-tab])[data-active='true'] {
+  box-shadow: inset 0 -1px var(--cwm-accent);
+}
+__THEME_SCOPE__ [data-slot='composer-surface'] {
+  background: var(--cwm-surface) !important; border: 1px solid var(--cwm-rule) !important;
+  border-radius: 0 !important;
+}
+__THEME_SCOPE__ [data-slot='composer-surface']:focus-within { border-color: var(--cwm-accent) !important; }
+__THEME_SCOPE__ [data-slot='composer-surface'] button[data-variant='default'] { border-radius: 0; }
+@media (max-width: 850px) {
+  __THEME_SCOPE__ [data-cwm-monument] { right: 0; bottom: 15%; width: min(68vh, 100vw); }
+  __THEME_SCOPE__ [data-slot='aui_intro'] > div { max-width: min(100%, 340px); }
+}
+@media (max-width: 520px) {
+  __THEME_SCOPE__ [data-cwm-monument] { right: 0; bottom: 14%; width: 100vw; }
+  __THEME_SCOPE__ [data-slot='aui_intro'] { justify-content: flex-start; padding-block-start: max(26px, 9vh); }
+  __THEME_SCOPE__ [data-cwm-stage]::after {
+    background: linear-gradient(180deg, #030810 25%, #03081025 52%, transparent 70%, #030810 92%);
+  }
+}
